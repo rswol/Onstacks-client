@@ -34,8 +34,8 @@ export const Header: React.FC<{
   useEffect(() => {
     if (data && data.config.length > 0) {
       setTokens({
-        BTC: Number.parseFloat(data.config[1].value).toFixed(2),
-        STX: Number.parseFloat(data.config[0].value).toFixed(2),
+        BTC: Number.parseFloat(data.config[1]?.value).toFixed(2),
+        STX: Number.parseFloat(data.config[0]?.value).toFixed(2),
       });
     }
   }, [data]);
