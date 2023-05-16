@@ -70,10 +70,11 @@ export const MiningData: React.FC<Props> = ({
 
   useEffect(() => {
     if (blocks.length > 0 || params?.block) {
-      setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
-      getBlockByNumber(
-        params?.block || blocks[1].block_number.toString().substr(1)
-      );
+      if (params.block) {
+        setCurrentBlockNumber(params.block);
+      } else {
+        setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
+      }
     }
     if (params?.index || params?.block) {
       setTabIndex(params?.index ? +params?.index : 0);

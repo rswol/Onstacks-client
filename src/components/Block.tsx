@@ -26,11 +26,13 @@ export const Block: React.FC<any> = ({
   const [currentBlockNumber, setCurrentBlockNumber] = useState(
     currentBlockN || 0
   );
+
   const { data: blockInfo } = useQuery(BlockInfo, {
     variables: {
       stacks_block_height: currentBlockNumber,
     },
   });
+
   const [currentBlock, setCurrentBlock] = useState<any>();
   const [currentBlockIndex, setCurrentBlockIndex] = useState(1);
   const [winnerAddressIndex, setWinnerAddressColor] = useState(0);
@@ -69,7 +71,11 @@ export const Block: React.FC<any> = ({
 
   useEffect(() => {
     if (blocks.length > 0 || params?.block) {
-      setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
+      if (params.block) {
+        setCurrentBlockNumber(params.block);
+      } else {
+        setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
+      }
     }
     if (params?.index || params?.block) {
       setTabIndex(params?.index ? +params?.index : 0);
